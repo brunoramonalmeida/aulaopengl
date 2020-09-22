@@ -10,7 +10,7 @@ GLfloat rotateX = 0.0f;
 GLfloat rotateY = 1.0f;
 GLfloat rotateZ = 0.0f;
 
-GLfloat xstep = 0.1f;
+GLfloat xstep = 0.2f;
 GLfloat ystep = 0.1f;
 
 GLfloat windowWidth;
@@ -18,8 +18,12 @@ GLfloat windowHeight;
 
 void Timer(int value)
 {
-    objX += xstep;
-    objY += ystep;
+    if (objX < 30)
+        objX += xstep;
+    else
+        objX -= xstep;
+
+    // objY += ystep;
 
     glutPostRedisplay();
     glutTimerFunc(33,Timer, 1);
@@ -124,7 +128,7 @@ int main(int argc, char **argv)
     glutDisplayFunc(displayMe);
     glutKeyboardFunc(teclado);        // Registro de callback de teclado
     glutSpecialFunc(tecladoEspecial); // Registro de callback de teclado
-    glutTimerFunc(33, Timer, 1);
+    glutTimerFunc(33, Timer, 1);      // Registro de callback de animação
     // -----
     glutMainLoop(); // Loop principal
     return 0;
