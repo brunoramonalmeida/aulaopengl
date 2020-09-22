@@ -6,11 +6,25 @@ GLfloat scX = 1.0f;
 GLfloat scY = 1.0f;
 
 GLfloat angulo = 0.0f;
-GLfloat rotateX = 0.5f;
+GLfloat rotateX = 0.0f;
 GLfloat rotateY = 1.0f;
 GLfloat rotateZ = 0.0f;
 
-// GLfloat velocidade = 0.5f;
+GLfloat xstep = 0.1f;
+GLfloat ystep = 0.1f;
+
+GLfloat windowWidth;
+GLfloat windowHeight;
+
+void Timer(int value)
+{
+    objX += xstep;
+    objY += ystep;
+
+    glutPostRedisplay();
+    glutTimerFunc(33,Timer, 1);
+}
+
 
 void desenhaQuadrado()
 {
@@ -105,11 +119,12 @@ int main(int argc, char **argv)
     glutInitDisplayMode(GLUT_SINGLE); // Modo de visualização
     glutInitWindowSize(800, 600);     // Tamanho da Janela
     glutInitWindowPosition(100, 100); // Posição inicial
-    glutCreateWindow("Exemplo 8");    // Título da janela
+    glutCreateWindow("Exemplo 10");    // Título da janela
     // Callbacks
     glutDisplayFunc(displayMe);
-    glutKeyboardFunc(teclado);        // Registro de callback de teclado alfanumérico
-    glutSpecialFunc(tecladoEspecial); // Registro de callback de teclado - teclas especiais
+    glutKeyboardFunc(teclado);        // Registro de callback de teclado
+    glutSpecialFunc(tecladoEspecial); // Registro de callback de teclado
+    glutTimerFunc(33, Timer, 1);
     // -----
     glutMainLoop(); // Loop principal
     return 0;
